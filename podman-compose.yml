@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+
+  oracle:
+    image: container-registry.oracle.com/database/free:latest
+    environment:
+      ORACLE_PWD: ${ORACLE_PWD}
+    ports:
+      - '1521:1521'
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ['CMD', 'bash', '-c',
+             'echo exit | sqlplus -L sys/${ORACLE_PWD}@localhost/FREEPDB1 as sysdba']
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+
+  app:
+    build: .
+    ports:
+      - '8501:8501'
+    volumes:
+      - ./docs:/app/docs
+    env_file: .env
+    depends_on:
+      oracle:
+        condition: service_healthy
+
+volumes:
+  oracle-data:

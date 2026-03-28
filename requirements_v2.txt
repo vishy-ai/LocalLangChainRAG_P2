@@ -1,0 +1,11 @@
+langchain
+langchain-community
+langchain-ollama
+langchain-core
+oracledb
+python-dotenv
+streamlit
+pypdf
+python-docx
+unstructured
+docx2txt
