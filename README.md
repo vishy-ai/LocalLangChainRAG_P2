@@ -31,13 +31,7 @@ Same as Part 1, plus:
 
 ```bash
 # Clone the repo and switch to this branch
-git clone https://github.com/YOURUSERNAME/local-rag-oracle.git
-cd local-rag-oracle
-git checkout part-2
-
 # Copy and fill in credentials
-cp .env.example .env
-
 # Start everything
 podman-compose up
 ```
